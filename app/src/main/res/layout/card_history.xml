@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    android:background="@android:color/white"
+    android:layout_marginBottom="5dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bandung - Surabaya"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:id="@+id/txt_jalan"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ekonomi"
+        android:textSize="17sp"
+        android:layout_marginTop="5dp"
+        android:id="@+id/txt_seat"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="23 september 2017"
+        android:textSize="15sp"
+        android:layout_marginTop="5dp"
+        android:textColor="@android:color/black"
+        android:id="@+id/txt_tgl"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Adult : 10"
+        android:layout_marginTop="3dp"
+        android:textSize="13sp"
+        android:id="@+id/txt_adult"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Child : 10"
+        android:layout_marginTop="3dp"
+        android:textSize="13sp"
+        android:id="@+id/txt_child"/>
+
+</LinearLayout>

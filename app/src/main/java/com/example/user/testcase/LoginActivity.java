@@ -20,11 +20,9 @@ import butterknife.ButterKnife;
 
 public class LoginActivity extends AppCompatActivity {
 
-    @BindView(R.id.edt_user)
-    EditText edtUser;
+    @BindView(R.id.edt_user) EditText edtUser;
     @BindView(R.id.edt_pass) EditText edtPass;
-    @BindView(R.id.btn_login)
-    Button btnLogin;
+    @BindView(R.id.btn_login) Button btnLogin;
     @BindView(R.id.btn_regis) Button btnRegis;
 
     @Override

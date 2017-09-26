@@ -61,7 +61,7 @@ public class HistoryFragment extends Fragment {
         adapter = new HistoryAdapter(listBooking);
         rvHistory.setAdapter(adapter);
         callBooking();
-
+        Log.d("TEST", "HISTORY ACTIVITY CREATED");
     }
 
     public void callBooking() {

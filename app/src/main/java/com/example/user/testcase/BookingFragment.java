@@ -27,6 +27,7 @@ import com.example.user.testcase.data.Member;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -39,17 +40,13 @@ import static android.content.Context.ALARM_SERVICE;
  */
 public class BookingFragment extends Fragment {
 
-    @BindView(R.id.spinner_from)
-    Spinner spinnerFrom;
+    @BindView(R.id.spinner_from) Spinner spinnerFrom;
     @BindView(R.id.spinner_to) Spinner spinnerTo;
     @BindView(R.id.spinner_class) Spinner spinnerClass;
-    @BindView(R.id.txt_departure)
-    TextView txtDeparture;
-    @BindView(R.id.picker_adult)
-    NumberPicker pickerAdult;
+    @BindView(R.id.txt_departure) TextView txtDeparture;
+    @BindView(R.id.picker_adult) NumberPicker pickerAdult;
     @BindView(R.id.picker_child) NumberPicker pickerChild;
-    @BindView(R.id.btn_book)
-    Button btnBook;
+    @BindView(R.id.btn_book) Button btnBook;
 
     ArrayList<String> listFrom,listTo,listSeat;
 
@@ -130,9 +127,21 @@ public class BookingFragment extends Fragment {
     }
 
     private void setNotifications(Booking booking) {
-        
+        Intent intent = new Intent(getActivity().getApplicationContext(), AlarmReceiver.class);
+        intent.setAction("android.intent.action.NOTIFY");
+        intent.putExtra("depart", booking.getFrom());
+        intent.putExtra("destination", booking.getTujuan());
+        intent.putExtra("day", booking.getDay());
+        intent.putExtra("month", booking.getMonth());
+        intent.putExtra("year", booking.getYear());
 
+        Calendar calendar = new GregorianCalendar();
 
+        PendingIntent pendingIntent = PendingIntent
+                .getBroadcast(getActivity().getApplicationContext(), 1, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(ALARM_SERVICE);
+        alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() + 10000, pendingIntent);
+        Log.d("TEST", "ALARM HAS BEEN SET");
     }
 
     private void UploadDataNumberPicker() {

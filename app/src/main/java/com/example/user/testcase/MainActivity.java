@@ -49,6 +49,10 @@ public class MainActivity extends AppCompatActivity {
         idMember = getIntent().getLongExtra("idMember",0);
 
         pager.setAdapter(new TabFragmentPagerAdapter(getSupportFragmentManager()));
+        if(getIntent() != null && getIntent().getAction() == "notify") {
+            Log.d("TEST", "GO TO HISTORY");
+            pager.setCurrentItem(1);
+        }
         pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {

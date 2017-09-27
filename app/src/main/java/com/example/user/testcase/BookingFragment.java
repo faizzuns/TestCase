@@ -130,7 +130,6 @@ public class BookingFragment extends Fragment {
     }
 
     private void setNotifications(Booking booking) {
-        
 
 
     }

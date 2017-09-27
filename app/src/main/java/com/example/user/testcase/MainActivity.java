@@ -18,6 +18,8 @@ import android.widget.DatePicker;
 
 import com.example.user.testcase.data.Booking;
 import com.example.user.testcase.data.Member;
+import com.raizlabs.android.dbflow.config.FlowConfig;
+import com.raizlabs.android.dbflow.config.FlowManager;
 
 import java.util.Calendar;
 
@@ -45,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         getSupportActionBar().setTitle("TestCase");
         ButterKnife.bind(this);
+        FlowManager.init(new FlowConfig.Builder(this).build());
 
         idMember = getIntent().getLongExtra("idMember",0);
 

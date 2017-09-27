@@ -24,6 +24,8 @@ import android.widget.Toast;
 
 import com.example.user.testcase.data.Booking;
 import com.example.user.testcase.data.Member;
+import com.example.user.testcase.data.Member_Table;
+import com.raizlabs.android.dbflow.sql.language.Select;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -134,11 +136,28 @@ public class BookingFragment extends Fragment {
         intent.putExtra("day", booking.getDay());
         intent.putExtra("month", booking.getMonth());
         intent.putExtra("year", booking.getYear());
+        intent.putExtra("member",booking.getIdMember());
 
-        Calendar calendar = new GregorianCalendar();
+        Member member = new Select()
+                .from(Member.class)
+                .where(Member_Table.id.is(booking.getIdMember()))
+                .querySingle();
+
+        int idxNotif = 0 ;
+
+        if (member != null){
+             idxNotif = member.getIndexNotif();
+
+            member.setIndexNotif(idxNotif+1);
+            member.save();
+        }
+
+        intent.putExtra("idxNotif",idxNotif);
+
+        Calendar calendar = Calendar.getInstance();
 
         PendingIntent pendingIntent = PendingIntent
-                .getBroadcast(getActivity().getApplicationContext(), 1, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+                .getBroadcast(getActivity().getApplicationContext(), idxNotif, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(ALARM_SERVICE);
         alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() + 10000, pendingIntent);
         Log.d("TEST", "ALARM HAS BEEN SET");

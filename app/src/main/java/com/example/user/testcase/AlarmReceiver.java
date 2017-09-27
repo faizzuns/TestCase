@@ -1,6 +1,7 @@
 package com.example.user.testcase;
 
 import android.app.AlarmManager;
+import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
@@ -56,12 +57,16 @@ public class AlarmReceiver extends BroadcastReceiver {
                 date = date + "-0";
             }
         }
+
+        long id = intent.getLongExtra("member",0);
+        int idxNotif = intent.getIntExtra("idxNotif",0);
         String message = "10 seconds after booking: " + depart + "-" + destination;
 
         Intent activityIntent = new Intent(context, MainActivity.class);
         activityIntent.setAction("notify");
+        activityIntent.putExtra("idMember",id);
         PendingIntent pendingIntent = PendingIntent
-                .getActivity(context, 2, activityIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+                .getActivity(context, idxNotif, activityIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context)
                 .setAutoCancel(true)
@@ -69,7 +74,8 @@ public class AlarmReceiver extends BroadcastReceiver {
                 .setContentText(message)
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setLargeIcon(icon)
-                .setContentIntent(pendingIntent);
+                .setContentIntent(pendingIntent)
+                .setPriority(Notification.PRIORITY_HIGH);
         NotificationCompat.BigTextStyle bigText = new NotificationCompat.BigTextStyle();
         bigText.bigText(message)
                 .setBigContentTitle("Report")
@@ -78,6 +84,6 @@ public class AlarmReceiver extends BroadcastReceiver {
         builder.setSound(notifSound);
 
         NotificationManager manager = (NotificationManager) context.getSystemService(NOTIFICATION_SERVICE);
-        manager.notify(0, builder.build());
+        manager.notify(idxNotif, builder.build());
     }
 }

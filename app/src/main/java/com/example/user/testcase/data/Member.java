@@ -26,6 +26,8 @@ public class Member extends BaseModel {
     String noTlp;
     @Column
     String password;
+    @Column
+    int indexNotif;
 
     public Member(){}
 
@@ -36,6 +38,15 @@ public class Member extends BaseModel {
         this.noTlp = noTlp;
         this.password = password;
         this.email = email;
+        this.indexNotif = 0;
+    }
+
+    public int getIndexNotif() {
+        return indexNotif;
+    }
+
+    public void setIndexNotif(int indexNotif) {
+        this.indexNotif = indexNotif;
     }
 
     public void setEmail(String email) {
